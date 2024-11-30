@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Message Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .info-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffeedb;
+            border: 1px solid #ffcc80;
+            border-radius: 4px;
+            color: #774c00;
+            font-size: 14px;
+        }
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .info-card {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+        }
+        .info-card h3 {
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="/">My Projects</a>
+        <a href="/">Spam Message Detection</a>
+    </div>
+
+    <div class="container">
+        <h1>Spam Message Detector</h1>
+        
+        <!-- Informational Message -->
+        <div class="info-message">
+            Note: The model may not be 100% accurate and should be used with caution.
+        </div>
+
+        <!-- Search Form -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    name="message" 
+                    placeholder="Enter your message here..." 
+                    value="{{ message }}"  
+                    required/>
+                <button type="submit">Detect</button>
+            </div>
+        </form>
+
+        <!-- Prediction Result -->
+        {% if prediction != 'N/A' %}
+        <div class="info-card">
+            <h3>Prediction Result:</h3>
+            <p>{{ prediction }}</p>
+            <p>Probability of the message being {{ prediction }} is {{ proba }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
