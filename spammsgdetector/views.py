@@ -49,7 +49,6 @@ def predict_message(message):
     else:
         result['res'] = "Not spam"
         result['proba'] = round(trained_model.predict_proba(processed_data)[0][0],2)
-    print(result)
     return result
 
 
